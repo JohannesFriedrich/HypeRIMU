@@ -11,7 +11,7 @@
 #'
 #' @examples
 #'
-#' file <- system.file("extdata", "HIMU-2017-07-25_11-26-18.csv", package="HypeRIMU")
+#' file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
 #'
 #' data <- execute_file(file, timestamp = TRUE)
 #'
@@ -72,7 +72,7 @@ get_specificSensor <- function(data, sensorName){
   }
 
   if("timestamp" %in% available_colNames){
-    timestepIndex <- grepl(pattern = "timestamp", x = available_colNames) ##Should be 1, but you nenver know
+    timestepIndex <- grepl(pattern = "timestamp", x = available_colNames) ##Should be 1, but you never know
     return(data[, (sensorIndex | timestepIndex)])
   } else {
     return(data[,sensorIndex])

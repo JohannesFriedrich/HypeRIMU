@@ -7,7 +7,7 @@
 #' ## Example 1: read data from local file
 #' ##=====================================
 #'
-#' file <- system.file("extdata", "HIMU-2017-07-25_11-26-18.csv", package="HypeRIMU")
+#' file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
 #'
 #' data <- execute_file(file, timestamp = TRUE)
 #'
@@ -18,8 +18,6 @@ execute_file <- function(filepath, timestamp = FALSE) {
 
   sensor_data_all <- read.csv(file = filepath,
                               skip = 3)
-
-  # convert from UNIX time
 
   ##check if timestamp = FALSE, but data suggest to have one:
   if(!timestamp && (ncol(sensor_data_all) %% 3 == 1)){
