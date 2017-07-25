@@ -16,6 +16,27 @@
 
 execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
 
+  available_sensorNames <- c("MPL_Gyroscope",
+                             "MPL_Accelerometer",
+                             "MPL_Magnetic_Field",
+                             "MPL_Orientation",
+                             "MPL_Rotation_Vector",
+                             "MPL_Game_Rotation",
+                             "MPL_Linear_Acceleration",
+                             "MPL_Gravity",
+                             "MPL_Significant_Motion",
+                             "MPL_Step_Detector",
+                             "MPL_Step_Coutner",
+                             "MPL_Geomagnetic_Rotation",
+                             "CM36686_Proximity_Sensor",
+                             "CM36686_Light_Sensor",
+                             "Screen_Orientation_Sensor")
+
+  if(!sensorNames %in% available_sensorNames){
+    stop(paste0("[execute_TCP()] Sensor name not supported. Supported sensor names are: ", paste(available_sensorNames, collapse = ", ")))
+
+  }
+
   data <- NULL
 
   con <- socketConnection("localhost", port = port, server = T)
