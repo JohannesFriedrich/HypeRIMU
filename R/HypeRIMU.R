@@ -27,4 +27,5 @@
 #'
 #' @keywords package
 #' @importFrom utils read.csv
+#' @importFrom methods is
 NULL

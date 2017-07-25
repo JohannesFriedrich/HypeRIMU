@@ -4,14 +4,14 @@
 \alias{execute_TCP}
 \title{Performs data acquisition from local file}
 \usage{
-execute_TCP(port, timestamp = FALSE, sensor_names = NULL)
+execute_TCP(port, timestamp = FALSE, sensorNames = NULL)
 }
 \arguments{
 \item{port}{\link{numeric} (\strong{required}): Number of the port}
 
 \item{timestamp}{\link{logical}: Is a timestamp available in the data?}
 
-\item{sensor_names}{\link{character} (\strong{optional}): Name of the exported sensors}
+\item{sensorNames}{\link{character} (\strong{optional}): Name of the exported sensors}
 }
 \description{
 Performs data acquisition from local file

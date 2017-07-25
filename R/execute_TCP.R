@@ -2,7 +2,7 @@
 #'
 #' @param port [numeric] (**required**): Number of the port
 #' @param timestamp [logical]: Is a timestamp available in the data?
-#' @param sensor_names [character] (**optional**): Name of the exported sensors
+#' @param sensorNames [character] (**optional**): Name of the exported sensors
 #'
 #' @examples
 #' \dontrun{
@@ -14,7 +14,7 @@
 #' @md
 #' @export
 
-execute_TCP <- function(port, timestamp = FALSE, sensor_names = NULL) {
+execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
 
   data <- NULL
 
@@ -24,7 +24,6 @@ execute_TCP <- function(port, timestamp = FALSE, sensor_names = NULL) {
   close(con)
 
   ## transform data
-
   sensor_data_all <- t(apply(X = data, MARGIN = 1, FUN = function(x){
     as.numeric(unlist(strsplit(x, ",")))
   }))
@@ -49,10 +48,10 @@ execute_TCP <- function(port, timestamp = FALSE, sensor_names = NULL) {
     timestep <-  FALSE
   }
 
-  if(!is.null(sensor_names) && timestep){
-    colnames(sensor_data_all) <- c("Timestamp", paste0(rep(sensor_names,each=3), c(".x", ".y", ".z")))
+  if(!is.null(sensorNames) && timestep){
+    colnames(sensor_data_all) <- c("Timestamp", paste0(rep(sensorNames,each=3), c(".x", ".y", ".z")))
   } else {
-    colnames(sensor_data_all) <- paste0(rep(sensor_names,each=3), c(".x", ".y", ".z"))
+    colnames(sensor_data_all) <- paste0(rep(sensorNames,each=3), c(".x", ".y", ".z"))
   }
 
   return(sensor_data_all)
