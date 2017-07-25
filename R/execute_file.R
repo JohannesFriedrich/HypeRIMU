@@ -1,6 +1,6 @@
 #' Performs data acquisition from local file
 #'
-#' @param filepath [character] (**required**): path and file to be imported.
+#' @param file [character] (**required**): Path or file to be imported.
 #' @param timestamp [logical]: Is a timestamp available in the data?
 #' @examples
 #' ##=====================================
@@ -14,9 +14,9 @@
 #' @md
 #' @export
 
-execute_file <- function(filepath, timestamp = FALSE) {
+execute_file <- function(file, timestamp = FALSE) {
 
-  sensor_data_all <- read.csv(file = filepath,
+  sensor_data_all <- read.csv(file = file,
                               skip = 3)
 
   ##check if timestamp = FALSE, but data suggest to have one:

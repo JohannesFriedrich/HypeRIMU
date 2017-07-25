@@ -48,10 +48,8 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
     timestep <-  FALSE
   }
 
-  if(!is.null(sensorNames) && timestep){
-    colnames(sensor_data_all) <- c("Timestamp", paste0(rep(sensorNames,each=3), c(".x", ".y", ".z")))
-  } else {
-    colnames(sensor_data_all) <- paste0(rep(sensorNames,each=3), c(".x", ".y", ".z"))
+  if(!is.null(sensorNames) && timestamp){
+    colnames(sensor_data_all) <- c("timestamp", paste0(rep(sensorNames,each=3), c(".x", ".y", ".z")))
   }
 
   return(sensor_data_all)

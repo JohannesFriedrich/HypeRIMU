@@ -4,10 +4,10 @@
 \alias{execute_file}
 \title{Performs data acquisition from local file}
 \usage{
-execute_file(filepath, timestamp = FALSE)
+execute_file(file, timestamp = FALSE)
 }
 \arguments{
-\item{filepath}{\link{character} (\strong{required}): path and file to be imported.}
+\item{file}{\link{character} (\strong{required}): Path or file to be imported.}
 
 \item{timestamp}{\link{logical}: Is a timestamp available in the data?}
 }

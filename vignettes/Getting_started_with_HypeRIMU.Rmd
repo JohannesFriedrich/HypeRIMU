@@ -44,10 +44,8 @@ When a timestamp is available in the file, the function changes the UNIX format 
 
 
 ```{r}
-
-data <- execute_file(filepath = "~/Schreibtisch/temp/HIMU/short_y_impulse.csv", timestamp = T)
-
-head(data[,1:4])
+file <- system.file('extdata', 'short_y_impulse.csv', package = 'HypeRIMU')
+data <- execute_file(file = file, timestamp = TRUE)
 ```
 
 ### TCP
