@@ -13,6 +13,7 @@ vignette: >
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+library(HypeRIMU)
 ```
 
 # Motivation
@@ -43,7 +44,7 @@ When a timestamp is available in the file, the function changes the UNIX format 
 
 
 ```{r}
-library(HypeRIMU)
+
 data <- execute_file(filepath = "~/Schreibtisch/temp/HIMU/short_y_impulse.csv", timestamp = T)
 
 head(data[,1:4])
