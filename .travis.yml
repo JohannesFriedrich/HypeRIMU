@@ -1,14 +1,11 @@
 language: r
 cache: packages
 sudo: true
-warnings_are_errors: true
+warnings_are_errors: false
 
-r_build_args: --no-build-vignettes --no-manual --no-resave-data
-r_check_args: --no-build-vignettes --no-manual
-##r:
-
- ## - release
-##  - devel
+r:
+ - release
+ - devel
 
 ##create notification
 notifications:
