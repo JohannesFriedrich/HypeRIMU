@@ -1,14 +1,13 @@
-language: r
+language: R
 cache: packages
 sudo: true
-warnings_are_errors: false
+warnings_are_errors: true
 
 os:
   - linux
   - osx
 
 r:
- - release
  - devel
 
 ##create notification
