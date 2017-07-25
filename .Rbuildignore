@@ -10,5 +10,5 @@ img/
 
 # Exclude GitHub stuff
 LICENSE$
-README\.md
+Readme\.md
 ^appveyor\.yml$
