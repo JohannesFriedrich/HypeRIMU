@@ -18,12 +18,13 @@ devtools::install_github("R-Lum/HypeRIMU@master")
 
 ## Platform tests status 
 [![Build Status](https://travis-ci.org/JohannesFriedrich/HypeRIMU.svg?branch=master)](https://travis-ci.org/JohannesFriedrich/HypeRIMU)
+[![Build status](https://ci.appveyor.com/api/projects/status/lm7jn3t558yxveve?svg=true)](https://ci.appveyor.com/project/JohannesFriedrich/hyperimu)
 
 ## To Do
 
 * support UDP stream
 * make examples
-* support function to get IP adress of server
+* write function to get IP adress of server
 
 ## License
 
