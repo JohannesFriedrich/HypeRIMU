@@ -8,7 +8,7 @@ os:
   - osx
 
 r:
- - devel
+ - release
 
 ##create notification
 notifications:
