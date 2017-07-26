@@ -1,4 +1,4 @@
-#' Seperate sepcific Sensor from data
+#' Extract sepcific sensor from data
 #'
 #' @param data [data.frame] (**required**): [data.frame] from [execute_file] or [execute_TCP].
 #' @param sensorName [character] (**required**): Which sensor should be extracted?
@@ -10,6 +10,9 @@
 #' Note: Case sensitive
 #'
 #' @examples
+#' ##=====================================
+#' ## Example 1: extract sepcific sensor
+#' ##=====================================
 #'
 #' file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
 #'
@@ -26,10 +29,9 @@ get_specificSensor <- function(data, sensorName){
 
   ## Checks
 
-  if(is(data)[1] != "data.frame"){
-    stop("[get_specificSensor()] Argument data has to be a data.frame")
+  if(is(data)[1] != "data.frame")
+    stop("[get_specificSensor()] Argument data has to be a data.frame", call. = FALSE)
 
-  }
 
   available_sensorNames <- c("MPL_Gyroscope",
                              "MPL_Accelerometer",

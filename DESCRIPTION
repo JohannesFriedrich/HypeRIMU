@@ -11,10 +11,11 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Suggests: 
+Suggests:
   knitr,
   rmarkdown,
   ggplot2,
   scales,
-  reshape2
+  reshape2,
+  testthat
 VignetteBuilder: knitr

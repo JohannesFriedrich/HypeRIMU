@@ -16,6 +16,20 @@
 
 execute_file <- function(file, timestamp = FALSE) {
 
+  ##============================================================================##
+  ##ERROR HANDLING
+  ##============================================================================##
+
+  if(missing(file))
+    stop("[execute_file()] Please provide a file", call. = FALSE)
+
+  if(class(file) != "character")
+    stop("[execute_file()] Argument file has to be of type character", call. = FALSE)
+
+  if(class(timestamp) != "logical")
+    stop("[execute_file()] Argument timestamp has to be of type logical",  call. = FALSE)
+
+  ## Read data
   sensor_data_all <- read.csv(file = file,
                               skip = 3)
 
@@ -37,7 +51,6 @@ execute_file <- function(file, timestamp = FALSE) {
     cat("No timestamp detected, but argument 'timestep = TRUE`. Set to 'FALSE'.\n")
     timestep <- FALSE
   }
-
 
   return(sensor_data_all)
 }

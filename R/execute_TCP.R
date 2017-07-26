@@ -6,6 +6,9 @@
 #'
 #' @examples
 #' \dontrun{
+#' ##=====================================
+#' ## Example 1: read data from TCP
+#' ##=====================================
 #'
 #' data <- execute_TCP(port = 5555, timestamp = T)
 #' ## start HyperIMU app
@@ -15,6 +18,22 @@
 #' @export
 
 execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
+
+  ##============================================================================##
+  ##ERROR HANDLING
+  ##============================================================================##
+
+  if(missing(port))
+    stop("[execute_TCP()] Please provide a port", call. = FALSE)
+
+  if(class(port) != "numeric")
+    stop("[execute_TCP()] Argument port has to be of type numeric", call. = FALSE)
+
+  if(class(timestamp) != "logical")
+    stop("[execute_TCP()] Argument timestamp has to be of type logical",  call. = FALSE)
+
+  if(!is.null(sensorNames) && class(sensorNames) != "character")
+    stop("[execute_TCP()] Argument sensorNames has to be of type character",  call. = FALSE)
 
   available_sensorNames <- c("MPL_Gyroscope",
                              "MPL_Accelerometer",
@@ -32,8 +51,8 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
                              "CM36686_Light_Sensor",
                              "Screen_Orientation_Sensor")
 
-  if(!sensorNames %in% available_sensorNames){
-    stop(paste0("[execute_TCP()] Sensor name not supported. Supported sensor names are: ", paste(available_sensorNames, collapse = ", ")))
+  if(!is.null(sensorNames) && !sensorNames %in% available_sensorNames){
+    stop(paste0("[execute_TCP()] Sensor name not supported. Supported sensor names are: ", paste(available_sensorNames, collapse = ", "),  call. = FALSE))
 
   }
 
