@@ -21,13 +21,13 @@ execute_file <- function(file, timestamp = FALSE) {
   ##============================================================================##
 
   if(missing(file))
-    stop("[execute_file()] Please provide a file", call. = FALSE)
+    stop("[execute_file()] Argument 'file' is missing", call. = FALSE)
 
   if(class(file) != "character")
-    stop("[execute_file()] Argument file has to be of type character", call. = FALSE)
+    stop("[execute_file()] Argument 'file' has to be of type character", call. = FALSE)
 
   if(class(timestamp) != "logical")
-    stop("[execute_file()] Argument timestamp has to be of type logical",  call. = FALSE)
+    stop("[execute_file()] Argument 'timestamp' has to be of type logical",  call. = FALSE)
 
   ## Read data
   sensor_data_all <- read.csv(file = file,

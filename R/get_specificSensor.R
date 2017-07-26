@@ -27,9 +27,17 @@
 
 get_specificSensor <- function(data, sensorName){
 
-  ## Checks
+  ##============================================================================##
+  ##ERROR HANDLING
+  ##============================================================================##
 
-  if(is(data)[1] != "data.frame")
+  if(missing(data))
+    stop("[get_specificSensor()] Argument 'data' is missing", call. = FALSE)
+
+  if(missing(sensorName))
+    stop("[get_specificSensor()] Argument 'sensorName' is missing", call. = FALSE)
+
+  if(class(data) != "data.frame")
     stop("[get_specificSensor()] Argument data has to be a data.frame", call. = FALSE)
 
 
@@ -50,7 +58,8 @@ get_specificSensor <- function(data, sensorName){
                              "Screen_Orientation_Sensor")
 
   if(!sensorName %in% available_sensorNames){
-    stop(paste0("[get_specificSensor()] Sensor not supported. Supported sensors are: ", paste(available_sensorNames, collapse = ", ")))
+    stop(paste0("[get_specificSensor()] Sensor not supported. Supported sensors are: ", paste(available_sensorNames, collapse = ", ")),
+         call. = FALSE)
 
   }
 
@@ -67,11 +76,6 @@ get_specificSensor <- function(data, sensorName){
 
   ## get index for sensor
   sensorIndex <- grepl(pattern = sensorName, x = available_colNames)
-
-  if(sum(sensorIndex) == 0){
-    stop(paste0("[get_specificSensor()] Sensor not found in data set. Supported sensors are: ", paste(available_colNames_unique, collapse = ", ")))
-
-  }
 
   if("timestamp" %in% available_colNames){
     timestepIndex <- grepl(pattern = "timestamp", x = available_colNames) ##Should be 1, but you never know
