@@ -20,6 +20,11 @@ devtools::install_github("R-Lum/HypeRIMU@master")
 [![Build Status](https://travis-ci.org/JohannesFriedrich/HypeRIMU.svg?branch=master)](https://travis-ci.org/JohannesFriedrich/HypeRIMU)
 [![Build status](https://ci.appveyor.com/api/projects/status/lm7jn3t558yxveve?svg=true)](https://ci.appveyor.com/project/JohannesFriedrich/hyperimu)
 
+
+### Unit test status
+[![Coverage Status](https://codecov.io/gh/JohannesFriedrich/HypeRIMU/branch/master/graph/badge.svg)](https://codecov.io/gh/JohannesFriedrich/HypeRIMU)
+
+
 ## To Do
 
 * support UDP stream
