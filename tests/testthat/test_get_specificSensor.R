@@ -20,6 +20,9 @@ test_that("Check class and length of output", {
 
 test_that("Check errors", {
 
+  file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
+  data <- execute_file(file, timestamp = TRUE)
+
   expect_error(get_specificSensor())
   expect_error(get_specificSensor(data = data))
   expect_error(get_specificSensor(sensorName = "MPL_Linear_Acceleration"))

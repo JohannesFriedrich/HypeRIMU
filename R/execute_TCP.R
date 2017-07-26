@@ -1,4 +1,4 @@
-#' Performs data acquisition from local file
+#' Performs data acquisition from data received from TCP
 #'
 #' @param port [numeric] (**required**): Number of the port
 #' @param timestamp [logical]: Is a timestamp available in the data?

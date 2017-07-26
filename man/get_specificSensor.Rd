@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_specificSensor.R
 \name{get_specificSensor}
 \alias{get_specificSensor}
-\title{Seperate sepcific Sensor from data}
+\title{Extract sepcific sensor from data}
 \usage{
 get_specificSensor(data, sensorName)
 }
@@ -18,9 +18,12 @@ Screen_Orientation_Sensor
 Note: Case sensitive}
 }
 \description{
-Seperate sepcific Sensor from data
+Extract sepcific sensor from data
 }
 \examples{
+##=====================================
+## Example 1: extract sepcific sensor
+##=====================================
 
 file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
 

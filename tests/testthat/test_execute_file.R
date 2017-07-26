@@ -5,6 +5,7 @@ test_that("Check class and length of output", {
 
   file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
   data <- execute_file(file, timestamp = TRUE)
+  data2 <- execute_file(file, timestamp = FALSE)
 
   ## === TESTS === ##
 
@@ -14,6 +15,7 @@ test_that("Check class and length of output", {
 })
 
 test_that("Check errors", {
+
   testthat::skip_on_cran()
 
   file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/execute_TCP.R
 \name{execute_TCP}
 \alias{execute_TCP}
-\title{Performs data acquisition from local file}
+\title{Performs data acquisition from data received from TCP}
 \usage{
 execute_TCP(port, timestamp = FALSE, sensorNames = NULL)
 }
@@ -14,10 +14,13 @@ execute_TCP(port, timestamp = FALSE, sensorNames = NULL)
 \item{sensorNames}{\link{character} (\strong{optional}): Name of the exported sensors}
 }
 \description{
-Performs data acquisition from local file
+Performs data acquisition from data received from TCP
 }
 \examples{
 \dontrun{
+##=====================================
+## Example 1: read data from TCP
+##=====================================
 
 data <- execute_TCP(port = 5555, timestamp = T)
 ## start HyperIMU app
