@@ -15,7 +15,6 @@ test_that("Check class and length of output", {
 })
 
 test_that("Check errors", {
-
   testthat::skip_on_cran()
 
   file <- system.file("extdata", "short_y_impulse.csv", package="HypeRIMU")
