@@ -35,7 +35,7 @@ Until now two different methods to read the sensor data are supported: TCP and r
 
 ### File
 
-The recommended way to read the data is to save the records on your mobilephone and submit them locally to your PC as a .csv file- The advantage from this method is the appropriation of sensor names. 
+The recommended way to read the data is to save the records on your smartphone and submit them locally to your PC as a .csv file. The advantage from this method is the appropriation of sensor names. 
 
 The following code shows an example of using a local file. The file can be imported via the function `execute_file()`. If your data provide a `timestamp`, choose `TRUE` for the argument `timestamp`. The functions tries to guess if a timestamp is available even when you set the `timestamp` argument wrong.
 
