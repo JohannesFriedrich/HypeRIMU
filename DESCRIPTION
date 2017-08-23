@@ -18,4 +18,6 @@ Suggests:
   scales,
   reshape2,
   testthat
+URL: https://github.com/JohannesFriedrich/HypeRIMU
+BugReports: https://github.com/JohannesFriedrich/HypeRIMU/issues
 VignetteBuilder: knitr
