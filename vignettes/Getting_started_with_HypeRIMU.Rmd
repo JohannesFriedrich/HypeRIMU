@@ -33,6 +33,14 @@ For using the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUSe
 
 Until now two different methods to read the sensor data are supported: TCP and reading a local file.
 
+### TCP
+
+The TCP protocol is also supported. Using this method needs to know your IP address to sumbit in the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUServer/).
+
+```{r, eval=FALSE}
+data <- execute_TCP(port = 5555, timestamp = T)
+```
+
 ### File
 
 The recommended way to read the data is to save the records on your smartphone and submit them locally to your PC as a .csv file. The advantage from this method is the appropriation of sensor names. 
@@ -46,14 +54,6 @@ When a timestamp is available in the file, the function changes the UNIX format 
 library(HypeRIMU)
 file <- system.file('extdata', 'short_y_impulse.csv', package = 'HypeRIMU')
 data <- execute_file(file = file, timestamp = TRUE)
-```
-
-### TCP
-
-The TCP protocol is also supported. Using this method needs to know your IP address to sumbit in the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUServer/).
-
-```{r, eval=FALSE}
-data <- execute_TCP(port = 5555, timestamp = T)
 ```
 
 ## Analyse sensor data
