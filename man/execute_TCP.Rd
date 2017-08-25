@@ -9,7 +9,7 @@ execute_TCP(port, timestamp = FALSE, sensorNames = NULL)
 \arguments{
 \item{port}{\link{numeric} (\strong{required}): Number of the port}
 
-\item{timestamp}{\link{logical}: Is a timestamp available in the data?}
+\item{timestamp}{\link{logical} (\strong{with default}): Is a timestamp available in the data?}
 
 \item{sensorNames}{\link{character} (\strong{optional}): Name of the exported sensors}
 }

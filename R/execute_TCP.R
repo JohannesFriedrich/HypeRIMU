@@ -1,7 +1,7 @@
 #' Performs data acquisition from data received from TCP
 #'
 #' @param port [numeric] (**required**): Number of the port
-#' @param timestamp [logical]: Is a timestamp available in the data?
+#' @param timestamp [logical] (**with default**): Is a timestamp available in the data?
 #' @param sensorNames [character] (**optional**): Name of the exported sensors
 #'
 #' @examples
@@ -55,6 +55,8 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
     stop(paste0("[execute_TCP()] Sensor name not supported. Supported sensor names are: ", paste(available_sensorNames, collapse = ", "),  call. = FALSE))
 
   }
+
+  ## open TCP connection
 
   data <- NULL
 

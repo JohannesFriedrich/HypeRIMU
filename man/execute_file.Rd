@@ -9,7 +9,7 @@ execute_file(file, timestamp = FALSE)
 \arguments{
 \item{file}{\link{character} (\strong{required}): Path or file to be imported.}
 
-\item{timestamp}{\link{logical}: Is a timestamp available in the data?}
+\item{timestamp}{\link{logical} (\strong{optional}): Is a timestamp available in the data?}
 }
 \description{
 Performs data acquisition from local file

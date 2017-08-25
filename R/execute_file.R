@@ -1,7 +1,7 @@
 #' Performs data acquisition from local file
 #'
 #' @param file [character] (**required**): Path or file to be imported.
-#' @param timestamp [logical]: Is a timestamp available in the data?
+#' @param timestamp [logical] (**optional**): Is a timestamp available in the data?
 #' @examples
 #' ##=====================================
 #' ## Example 1: read data from local file
