@@ -7,7 +7,7 @@ HypeRIMU is a **R**-package for reading sensor data from the Android app [HyperI
 ```r
 if(!require("devtools"))
   install.packages("devtools")
-devtools::install_github("R-Lum/HypeRIMU@master")
+devtools::install_github("JohannesFriedrich/HypeRIMU@master")
 ```
 
 ## Related projects 

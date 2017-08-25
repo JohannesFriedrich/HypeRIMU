@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 
 # Motivation
 
-Modern smartphones include a lot of sensors, e.g. for gravity or linear acceleration. Some apps provide the data collected from these sensors. One famous adroid app is "HyperIMU" (IMU: Inertial measurement unit). There are other apps available, but HyperIMU has some advantages:
+Modern smartphones include a lot of sensors, e.g. for gravity or linear acceleration. Some apps provide the data collected from these sensors. One famous android app is "HyperIMU" (IMU: Inertial measurement unit). There are other apps available, but HyperIMU has some advantages:
 
 * Choose which sensor data should be collected
 * Choose different streaming protocols: SD-card (locally on the smarphone), UDP, or TCP
@@ -27,7 +27,7 @@ The **R**-package HypeRIMU provides some handy functions to visualise sensor dat
 
 # Usage
 
-For using the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUServer/) and [HyperIMU Android](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu&hl=de).
+For using the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUServer/) and [HyperIMU Android](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu&hl=de) and install the app on your smartphone.
 
 ## Read sensor data
 
