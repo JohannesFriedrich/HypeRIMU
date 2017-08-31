@@ -4,11 +4,11 @@
 
 # Exclude screenshot
 img/
-
 # Exclude test suite files
 ^\.travis\.yml$
-
 # Exclude GitHub stuff
 LICENSE$
 Readme\.md
 ^appveyor\.yml$
+^docs$
+^_pkgdown\.yml$

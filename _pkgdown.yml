@@ -1,0 +1,21 @@
+title: rxylib Shiny
+url: https://johannesfriedrich.github.io/rxylibShiny/
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-84499524-2
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      href: index.html
+  right:
+    - icon: fa-newspaper-o
+      text: "news"
+      href: news/index.html
+    - icon: fa-file-code-o 
+      text: "functions"
+      href: reference/index.html
+    - icon: fa-github fa-lg
+      text: "github"
+      href: https://github.com/JohannesFriedrich/rxylibShiny 

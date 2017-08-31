@@ -2,7 +2,7 @@ Package: HypeRIMU
 Type: Package
 Title: Analysing Sensor Data From Smartphones
 Version: 0.0.1
-Author: Johannes Friedrich, University of Bayreuth
+Authors@R: person("Johannes", "Friedrich", role = c("aut", "cre"), email = "johannes.friedrich@uni-bayreuth.de")
 Maintainer: Johannes Friedrich <johannes.friedrich@uni-bayreuth.de>
 Description: A collection of functions to illustrate the use of smartphone sensors with the app HyperIMU.
 Imports:
