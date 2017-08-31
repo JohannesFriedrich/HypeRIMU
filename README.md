@@ -5,7 +5,7 @@
 [![Coverage Status](https://codecov.io/gh/JohannesFriedrich/HypeRIMU/branch/master/graph/badge.svg)](https://codecov.io/gh/JohannesFriedrich/HypeRIMU)
 
 
-HypeRIMU is a **R**-package for reading sensor data from the Android app [HyperIMU](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu&hl=de). 
+HypeRIMU is a **R**-package for reading sensor data from the Android app [HyperIMU](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu). 
 
 ## Installation and usage
 
@@ -18,9 +18,8 @@ devtools::install_github("JohannesFriedrich/HypeRIMU@master")
 ## Related projects 
 
 * [HIMUServer](https://github.com/ianovir/HIMUServer/)
-* [HyperIMU Android](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu&hl=de)
+* [HyperIMU Android](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu)
 * [Android API](https://developer.android.com/guide/topics/sensors/index.html)
-
 
 
 ## To Do
