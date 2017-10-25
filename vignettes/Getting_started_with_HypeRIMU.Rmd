@@ -3,9 +3,12 @@ title: "Getting started with HypeRIMU"
 author: "Johannes Friedrich"
 date: "`r Sys.Date()`"
 output: 
-  html_document:
-    toc: true
-    toc_float: true
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 5
+    number_sections: yes
+    toc: yes
 vignette: >
   %\VignetteIndexEntry{Getting started with HypeRIMU}
   %\VignetteEngine{knitr::rmarkdown}
@@ -81,9 +84,8 @@ MPL_Linear_Acceleration_melt <- melt(MPL_Linear_Acceleration, id.vars = "timesta
 
 ggplot(MPL_Linear_Acceleration_melt, aes(x = timestamp, y = value, color = variable)) + 
   geom_line() +
-  scale_x_datetime(labels = date_format("%H:%M:%S")) +
-  theme(legend.position = "bottom")
-
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  scale_x_datetime(labels = date_format("%H:%M:%S", tz = Sys.timezone()))
 ```
 
 ```{r}
@@ -92,6 +94,6 @@ MPL_Accelerometer_melt <- melt(MPL_Accelerometer, id.vars = "timestamp")
 
 ggplot(MPL_Accelerometer_melt, aes(x = timestamp, y = value, color = variable)) + 
   geom_line() +
-  scale_x_datetime(labels = date_format("%H:%M:%S"))+
-  theme(legend.position = "bottom")
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  scale_x_datetime(labels = date_format("%H:%M:%S", tz = Sys.timezone())) 
 ```

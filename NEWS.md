@@ -1,3 +1,3 @@
-# HypeRIMU 0.0.1 (Release date: 1st September 2017)
+## Changes in version 0.0.1 (3rd November, 2017)
 
-- Initial release
+* Initial version
