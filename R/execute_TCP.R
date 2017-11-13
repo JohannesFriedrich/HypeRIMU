@@ -3,7 +3,7 @@
 #' @param port [numeric] (**required**): Number of the port
 #' @param timestamp [logical] (**with default**): Is a timestamp available in the data?
 #' @param sensorNames [character] (**optional**): Name of the exported sensors
-#' @param timout [integer] (**optional**): the timeout (in seconds) to be used for this connection.
+#' @param timeout [integer] (**optional**): the timeout (in seconds) to be used for this connection.
 #'
 #' @examples
 #' \dontrun{
@@ -93,13 +93,13 @@ execute_TCP <- function(port,
     sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
   }
   if(timestamp && (ncol(sensor_data_all) %% 3 != 1)){
-    cat("\n[execute_file()]:")
+    cat("\n[execute_TCP()]:")
     cat("No timestamp detected, but argument 'timestep = TRUE`. Set to 'FALSE'.\n")
     timestep <-  FALSE
   }
 
   if(!is.null(sensorNames) && timestamp){
-    colnames(sensor_data_all) <- c("timestamp", paste0(rep(sensorNames, each=3), c(".x", ".y", ".z")))
+    colnames(sensor_data_all) <- c("timestamp", paste0(rep(sensorNames, each = 3), c(".x", ".y", ".z")))
   }
 
   return(sensor_data_all)

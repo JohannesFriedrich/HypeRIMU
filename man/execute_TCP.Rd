@@ -13,7 +13,7 @@ execute_TCP(port, timestamp = FALSE, sensorNames = NULL, timeout = 10)
 
 \item{sensorNames}{\link{character} (\strong{optional}): Name of the exported sensors}
 
-\item{timout}{\link{integer} (\strong{optional}): the timeout (in seconds) to be used for this connection.}
+\item{timeout}{\link{integer} (\strong{optional}): the timeout (in seconds) to be used for this connection.}
 }
 \description{
 Performs data acquisition from data received from TCP
