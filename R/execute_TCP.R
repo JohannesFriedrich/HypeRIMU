@@ -3,12 +3,13 @@
 #' @param port [numeric] (**required**): Number of the port
 #' @param timestamp [logical] (**with default**): Is a timestamp available in the data?
 #' @param sensorNames [character] (**optional**): Name of the exported sensors
+#' @param timout [integer] (**optional**): the timeout (in seconds) to be used for this connection.
 #'
 #' @examples
 #' \dontrun{
-#' ##=====================================
-#' ## Example 1: read data from TCP
-#' ##=====================================
+#' ##==========================================
+#' ## Example 1: read data from TCP connecntion
+#' ##==========================================
 #'
 #' data <- execute_TCP(port = 5555, timestamp = T)
 #' ## start HyperIMU app
@@ -17,7 +18,10 @@
 #' @md
 #' @export
 
-execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
+execute_TCP <- function(port,
+                        timestamp = FALSE,
+                        sensorNames = NULL,
+                        timeout = 10) {
 
   ##============================================================================##
   ##ERROR HANDLING
@@ -52,7 +56,7 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
                              "Screen_Orientation_Sensor")
 
   if(!is.null(sensorNames) && !sensorNames %in% available_sensorNames){
-    stop(paste0("[execute_TCP()] Sensor name not supported. Supported sensor names are: ", paste(available_sensorNames, collapse = ", "),  call. = FALSE))
+    stop(paste0("[execute_TCP()]: Sensor name not supported. Supported sensor names are: ", paste(available_sensorNames, collapse = ", "),  call. = FALSE))
 
   }
 
@@ -60,10 +64,14 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
 
   data <- NULL
 
-  con <- socketConnection("localhost", port = port, server = T)
-    line <- readLines(con)
-    data <- cbind(data, line)
+  cat("[execute_TCP()] >> Waiting for connection ...")
+  con <- socketConnection("localhost", port = port, server = T, timeout = timeout)
+
+  cat(paste0(" \n[execute_TCP()] >> Listening on port ", port))
+  line <- readLines(con)
+  data <- cbind(data, line)
   close(con)
+  cat("\n[execute_TCP()] >> Close connection")
 
   ## transform data
   sensor_data_all <- t(apply(X = data, MARGIN = 1, FUN = function(x){
@@ -73,7 +81,7 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
   sensor_data_all <- as.data.frame(sensor_data_all)
 
   if(!timestamp && (ncol(sensor_data_all) %% 3 == 1)){
-    cat("\n[execute_file()]: ")
+    cat("\n[execute_TCP()]: ")
     cat("Timestamp detected. Used first coloumn as timestamp.\n")
     timestep <- TRUE
     # convert from UNIX time
@@ -85,7 +93,7 @@ execute_TCP <- function(port, timestamp = FALSE, sensorNames = NULL) {
     sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
   }
   if(timestamp && (ncol(sensor_data_all) %% 3 != 1)){
-    cat("\n[execute_file()]: ")
+    cat("\n[execute_file()]:")
     cat("No timestamp detected, but argument 'timestep = TRUE`. Set to 'FALSE'.\n")
     timestep <-  FALSE
   }

@@ -4,7 +4,7 @@
 \alias{execute_TCP}
 \title{Performs data acquisition from data received from TCP}
 \usage{
-execute_TCP(port, timestamp = FALSE, sensorNames = NULL)
+execute_TCP(port, timestamp = FALSE, sensorNames = NULL, timeout = 10)
 }
 \arguments{
 \item{port}{\link{numeric} (\strong{required}): Number of the port}
@@ -12,15 +12,17 @@ execute_TCP(port, timestamp = FALSE, sensorNames = NULL)
 \item{timestamp}{\link{logical} (\strong{with default}): Is a timestamp available in the data?}
 
 \item{sensorNames}{\link{character} (\strong{optional}): Name of the exported sensors}
+
+\item{timout}{\link{integer} (\strong{optional}): the timeout (in seconds) to be used for this connection.}
 }
 \description{
 Performs data acquisition from data received from TCP
 }
 \examples{
 \dontrun{
-##=====================================
-## Example 1: read data from TCP
-##=====================================
+##==========================================
+## Example 1: read data from TCP connecntion
+##==========================================
 
 data <- execute_TCP(port = 5555, timestamp = T)
 ## start HyperIMU app
