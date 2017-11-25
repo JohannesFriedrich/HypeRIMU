@@ -3,7 +3,6 @@
 #' @param port [numeric] (**required**): Number of the port
 #' @param timestamp [logical] (**with default**): Is a timestamp available in the data?
 #' @param sensorNames [character] (**optional**): Name of the exported sensors
-#' @param timeout [integer] (**optional**): the timeout (in seconds) to be used for this connection.
 #'
 #' @examples
 #' \dontrun{
@@ -11,8 +10,7 @@
 #' ## Example 1: read data from TCP connecntion
 #' ##==========================================
 #'
-#' data <- execute_TCP(port = 5555, timestamp = T)
-#' ## start HyperIMU app
+#' data <- execute_TCP(port = 5555)
 #'
 #' }
 #' @md
@@ -20,8 +18,7 @@
 
 execute_TCP <- function(port,
                         timestamp = FALSE,
-                        sensorNames = NULL,
-                        timeout = 10) {
+                        sensorNames = NULL) {
 
   ##============================================================================##
   ##ERROR HANDLING
@@ -65,37 +62,41 @@ execute_TCP <- function(port,
   data <- NULL
 
   cat("[execute_TCP()] >> Waiting for connection ...")
-  con <- socketConnection("localhost", port = port, server = T, timeout = timeout)
+  con <- make.socket(host = "localhost", port = port, server = T)
+  on.exit(close.socket(con))
+  data <- list()
 
   cat(paste0(" \n[execute_TCP()] >> Listening on port ", port))
-  line <- readLines(con)
-  data <- cbind(data, line)
-  close(con)
-  cat("\n[execute_TCP()] >> Close connection")
+
+  repeat{
+    raw_data <- read.socket(con)
+    if (raw_data == "") break
+    data <- c(data, raw_data)
+  }
+  cat("\n[execute_TCP()] >> Close connection\n")
 
   ## transform data
-  sensor_data_all <- t(apply(X = data, MARGIN = 1, FUN = function(x){
+  sensor_data_all <- lapply(data, FUN = function(x){
     as.numeric(unlist(strsplit(x, ",")))
-  }))
+  })
 
-  sensor_data_all <- as.data.frame(sensor_data_all)
+  sensor_data_all <- as.data.frame(do.call(rbind, sensor_data_all))
 
   if(!timestamp && (ncol(sensor_data_all) %% 3 == 1)){
-    cat("\n[execute_TCP()]: ")
+    cat("[execute_TCP()]: ")
     cat("Timestamp detected. Used first coloumn as timestamp.\n")
-    timestep <- TRUE
-    # convert from UNIX time
-    sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
+    timestamp <- TRUE
   }
 
-  if(timestamp && (ncol(sensor_data_all) %% 3 == 1)){
+  if(timestamp && (ncol(sensor_data_all) %% 3 != 1)){
+    cat("[execute_TCP()]: ")
+    cat("No timestamp detected, but argument 'timestamp = TRUE`. Set to 'FALSE'.\n")
+    timestamp <-  FALSE
+  }
+
+  if(timestamp){
     # convert from UNIX time
     sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
-  }
-  if(timestamp && (ncol(sensor_data_all) %% 3 != 1)){
-    cat("\n[execute_TCP()]:")
-    cat("No timestamp detected, but argument 'timestep = TRUE`. Set to 'FALSE'.\n")
-    timestep <-  FALSE
   }
 
   if(!is.null(sensorNames) && timestamp){

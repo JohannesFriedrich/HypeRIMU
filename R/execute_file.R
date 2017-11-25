@@ -33,23 +33,30 @@ execute_file <- function(file, timestamp = FALSE) {
   sensor_data_all <- read.csv(file = file,
                               skip = 3)
 
+  ## Extract sampling time from file (is in the second line)
+  samplingTime <- readLines(con = file, n = 2)[2]
+  samplingTime <- strsplit(samplingTime, " ")[[1]]
+  samplingTime <- samplingTime[length(samplingTime)]
+  samplingTime <- as.numeric(gsub("[^0-9]", "", samplingTime))
+
   ##check if timestamp = FALSE, but data suggest to have one:
   if(!timestamp && (ncol(sensor_data_all) %% 3 == 1)){
     cat("\n[execute_file()]: ")
     cat("Timestamp detected. Used first coloumn as timestamp.\n")
-    timestep <- TRUE
-    # convert from UNIX time
-    sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
+    timestamp <- TRUE
+
   }
 
-  if(timestamp && (ncol(sensor_data_all) %% 3 == 1)){
-    # convert from UNIX time
-    sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
-  }
-  if(timestamp && (ncol(sensor_data_all) %% 3 != 1)){
+  if(timestamp && ncol(sensor_data_all) %% 3 != 1){
     cat("\n[execute_file()]: ")
-    cat("No timestamp detected, but argument 'timestep = TRUE`. Set to 'FALSE'.\n")
-    timestep <- FALSE
+    cat("No timestamp detected, but argument 'timestamp = TRUE`. Set to 'FALSE'.\n")
+    timestamp <- FALSE
+  }
+
+  if(!timestamp){
+    sensor_data_all$timestamp <- seq(0, (nrow(sensor_data_all) - 1)*samplingTime, samplingTime)
+  } else { # convert from UNIX time
+    sensor_data_all[,1] <- as.POSIXct(sensor_data_all[,1]/1000, origin = "1970-01-01")
   }
 
   return(sensor_data_all)

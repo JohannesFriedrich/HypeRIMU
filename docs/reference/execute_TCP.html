@@ -114,7 +114,7 @@
     <p>Performs data acquisition from data received from TCP</p>
     
 
-    <pre class="usage"><span class='fu'>execute_TCP</span>(<span class='no'>port</span>, <span class='kw'>timestamp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sensorNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>execute_TCP</span>(<span class='no'>port</span>, <span class='kw'>timestamp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sensorNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -131,10 +131,6 @@
       <th>sensorNames</th>
       <td><p>character (<strong>optional</strong>): Name of the exported sensors</p></td>
     </tr>
-    <tr>
-      <th>timout</th>
-      <td><p>integer (<strong>optional</strong>): the timeout (in seconds) to be used for this connection.</p></td>
-    </tr>
     </table>
     
 
@@ -144,8 +140,7 @@
 <span class='co'>## Example 1: read data from TCP connecntion</span>
 <span class='co'>##==========================================</span>
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>execute_TCP</span>(<span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>5555</span>, <span class='kw'>timestamp</span> <span class='kw'>=</span> <span class='no'>T</span>)
-<span class='co'>## start HyperIMU app</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>execute_TCP</span>(<span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>5555</span>)
 
 <span class='co'># }</span></pre>
   </div>

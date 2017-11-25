@@ -84,7 +84,7 @@
       <h1>Getting started with HypeRIMU</h1>
                         <h4 class="author">Johannes Friedrich</h4>
             
-            <h4 class="date">2017-11-13</h4>
+            <h4 class="date">2017-11-25</h4>
           </div>
 
     
@@ -146,14 +146,14 @@ MPL_Linear_Acceleration_melt &lt;-<span class="st"> </span><span class="kw"><a h
 
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(MPL_Linear_Acceleration_melt, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_date">scale_x_datetime</a></span>(<span class="dt">labels =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/date_format">date_format</a></span>(<span class="st">"%H:%M:%S"</span>, <span class="dt">tz =</span> <span class="kw">Sys.timezone</span>()))</code></pre></div>
 <p><img src="Getting_started_with_HypeRIMU_files/figure-html/plot%20sensor%20data-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MPL_Accelerometer_melt &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(MPL_Accelerometer, <span class="dt">id.vars =</span> <span class="st">"timestamp"</span>)
 
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(MPL_Accelerometer_melt, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_date">scale_x_datetime</a></span>(<span class="dt">labels =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/date_format">date_format</a></span>(<span class="st">"%H:%M:%S"</span>, <span class="dt">tz =</span> <span class="kw">Sys.timezone</span>())) </code></pre></div>
 <p><img src="Getting_started_with_HypeRIMU_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
