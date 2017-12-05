@@ -27,7 +27,7 @@ shinyServer(function(input, output, session){
         return(NULL)
       } else {
         observeEvent(input_TCP, {
-          return(execute_TCP(as.numeric(input$port_number)))
+          return(execute_TCP(as.numeric(input$port_number), timestamp = FALSE))
 
         })
       }
