@@ -10,6 +10,6 @@
 #' @docType package
 #'
 #' @keywords package
-#' @importFrom utils read.csv close.socket make.socket read.socket
+#' @importFrom utils read.csv
 #' @importFrom methods is
 NULL
