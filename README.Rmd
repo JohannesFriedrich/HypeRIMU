@@ -1,21 +1,34 @@
 ---
-title: "Getting started with HypeRIMU"
-author: "Johannes Friedrich"
-date: "`r Sys.Date()`"
-output: 
-  rmarkdown::html_vignette:
-    fig_caption: yes
-    fig_height: 5
-    fig_width: 5
-    number_sections: yes
-    toc: yes
-vignette: >
-  %\VignetteIndexEntry{Getting started with HypeRIMU}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: rmarkdown::github_document
 ---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.align = "center",
+                      collapse=TRUE, 
+                      comment="##", 
+                      fig.retina=2, 
+                      fig.path = "README_figs/README-")
+
+library(HypeRIMU)
+```
+
+[![Build Status](https://travis-ci.org/JohannesFriedrich/HypeRIMU.svg?branch=master)](https://travis-ci.org/JohannesFriedrich/HypeRIMU)
+[![Build status](https://ci.appveyor.com/api/projects/status/lm7jn3t558yxveve?svg=true)](https://ci.appveyor.com/project/JohannesFriedrich/hyperimu)
+[![Coverage Status](https://codecov.io/gh/JohannesFriedrich/HypeRIMU/branch/master/graph/badge.svg)](https://codecov.io/gh/JohannesFriedrich/HypeRIMU)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+
+
+HypeRIMU is a **R**-package for reading sensor data from the Android app [HyperIMU](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu). 
+
+# Installation
+
+```{r, eval = FALSE}
+if(!require("devtools"))
+  install.packages("devtools")
+devtools::install_github("JohannesFriedrich/HypeRIMU")
 ```
 
 # Motivation
@@ -32,19 +45,20 @@ The **R**-package HypeRIMU provides some handy functions to visualise sensor dat
 
 For using the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUServer/) and [HyperIMU Android](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu&hl=de) and install the app on your smartphone.
 
-## Read sensor data
+### Read sensor data
 
 Until now two different methods to read the sensor data are supported: TCP and a local file.
 
-### TCP
+#### TCP
 
 The TCP protocol is also supported. Using this method needs to know your IP address to sumbit in the smartphone app, see [HIMUServer](https://github.com/ianovir/HIMUServer/).
 
 ```{r, eval=FALSE}
+library(HypeRIMU)
 data <- execute_TCP(port = 5555)
 ```
 
-### File
+#### File
 
 The recommended way to read the data is to save the records on your smartphone and submit them locally to your PC as a .csv file. The advantage from this method is the appropriation of sensor names. 
 
@@ -59,7 +73,7 @@ file <- system.file('extdata', 'short_y_impulse.csv', package = 'HypeRIMU')
 data <- execute_file(file = file, timestamp = TRUE)
 ```
 
-## Analyse sensor data
+### Analyse sensor data
 
 HypeRIMU provides a function to extract some specific sensor data, see next code.
 When a sumbitted `sensorName` is not available in the `data`, an error message is printed.
@@ -70,12 +84,12 @@ MPL_Accelerometer <- get_specificSensor(data, sensorName = "MPL_Accelerometer")
 MPL_Linear_Acceleration <- get_specificSensor(data, sensorName = "MPL_Linear_Acceleration")
 ```
 
-## Plot sensor data
+### Plot sensor data
 
 Visulasing the data is one of the main advantages of this **R**-package. With some extra libraries a nice plot can be created in just a few lines. 
 NOTE: It is recommended to use data with a timestamp.
 
-```{r plot sensor data}
+```{r plot_sensor_data}
 library(ggplot2)
 library(reshape2)
 library(scales)
@@ -97,3 +111,28 @@ ggplot(MPL_Accelerometer_melt, aes(x = timestamp, y = value, color = variable)) 
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
   scale_x_datetime(labels = date_format("%H:%M:%S", tz = Sys.timezone())) 
 ```
+
+
+# Related projects 
+
+* [HIMUServer](https://github.com/ianovir/HIMUServer/)
+* [HyperIMU Android](https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu)
+* [Android API](https://developer.android.com/guide/topics/sensors/index.html)
+
+
+# To Do
+
+* support UDP stream
+* make examples
+* write function to get IP adress of server
+
+# License
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  

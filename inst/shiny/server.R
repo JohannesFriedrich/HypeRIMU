@@ -5,12 +5,12 @@ options(shiny.maxRequestSize = 200*1024^2)
 
 shinyServer(function(input, output, session){
 
-  theme <- theme(axis.text=element_text(size = 16),
-                 axis.title=element_text(size = 16, face = "bold"),
+  theme_update(axis.text = element_text(size = 16),
+                 axis.title = element_text(size = 16, face = "bold"),
                  axis.text.x = element_text(angle = 45, hjust = 1),
-                 legend.text=element_text(size = 14),
+                 legend.text = element_text(size = 14),
                  legend.title = element_text(size = 14, face = "bold"),
-                 legend.position="bottom")
+                 legend.position = "bottom")
 
 
   names <- reactiveValues(input_name = NULL)
@@ -88,8 +88,7 @@ shinyServer(function(input, output, session){
     ## PLOT
     g <- ggplot(plot_data_melt, aes(x = timestamp, y = value, color = Sensors)) +
       geom_line() +
-      scale_x_datetime +
-      theme
+      scale_x_datetime
 
     return(g)
 

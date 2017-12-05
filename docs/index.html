@@ -24,7 +24,7 @@
 </script>
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-vignette">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -79,33 +79,71 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
-    <div id="hyperimu" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#hyperimu" class="anchor"></a>HypeRIMU</h1></div>
+  <div class="col-md-9">
+    
+
+    
+    
+<div class="contents">
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <p>HypeRIMU is a <strong>R</strong>-package for reading sensor data from the Android app <a href="https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu">HyperIMU</a>.</p>
-<div id="installation-and-usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation-and-usage" class="anchor"></a>Installation and usage</h2>
+<div id="installation" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h1></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(<span class="st">"devtools"</span>))
   <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"JohannesFriedrich/HypeRIMU@master"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"JohannesFriedrich/HypeRIMU"</span>)</code></pre></div>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<p>Create a local csv-file with the app HyperIMU and load it on your PC</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"HypeRIMU"</span>)
+<div id="motivation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#motivation" class="anchor"></a>Motivation</h1>
+<p>Modern smartphones include a lot of sensors, e.g. for gravity or linear acceleration. Some apps provide the data collected from these sensors. One famous android app is “HyperIMU” (IMU: Inertial measurement unit). There are other apps available, but HyperIMU has some advantages:</p>
+<ul>
+<li>Choose which sensor data should be collected</li>
+<li>Choose different streaming protocols: SD-card (locally on the smarphone), UDP, or TCP</li>
+<li>The sampling rate can be adjusted</li>
+</ul>
+<p>The <strong>R</strong>-package HypeRIMU provides some handy functions to visualise sensor data. Different streaming protocolls are supported (a local .csv file and TCP).</p>
+</div>
+<div id="usage" class="section level1">
+<h1 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h1>
+<p>For using the smartphone app, see <a href="https://github.com/ianovir/HIMUServer/">HIMUServer</a> and <a href="https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu&amp;hl=de">HyperIMU Android</a> and install the app on your smartphone.</p>
+<div id="read-sensor-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#read-sensor-data" class="anchor"></a>Read sensor data</h3>
+<p>Until now two different methods to read the sensor data are supported: TCP and a local file.</p>
+<div id="tcp" class="section level4">
+<h4 class="hasAnchor">
+<a href="#tcp" class="anchor"></a>TCP</h4>
+<p>The TCP protocol is also supported. Using this method needs to know your IP address to sumbit in the smartphone app, see <a href="https://github.com/ianovir/HIMUServer/">HIMUServer</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(HypeRIMU)
+data &lt;-<span class="st"> </span><span class="kw"><a href="reference/execute_TCP.html">execute_TCP</a></span>(<span class="dt">port =</span> <span class="dv">5555</span>)</code></pre></div>
+</div>
+<div id="file" class="section level4">
+<h4 class="hasAnchor">
+<a href="#file" class="anchor"></a>File</h4>
+<p>The recommended way to read the data is to save the records on your smartphone and submit them locally to your PC as a .csv file. The advantage from this method is the appropriation of sensor names.</p>
+<p>The following code shows an example of using a local file. The file can be imported via the function <code><a href="reference/execute_file.html">execute_file()</a></code>. If your data provide a <code>timestamp</code>, choose <code>TRUE</code> for the argument <code>timestamp</code>. The functions tries to guess if a timestamp is available even when you set the <code>timestamp</code> argument wrong.</p>
+<p>When a timestamp is available in the file, the function changes the UNIX format to as POSIXct format.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(HypeRIMU)
 file &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">'extdata'</span>, <span class="st">'short_y_impulse.csv'</span>, <span class="dt">package =</span> <span class="st">'HypeRIMU'</span>)
-data &lt;-<span class="st"> </span><span class="kw"><a href="reference/execute_file.html">execute_file</a></span>(file, <span class="dt">timestamp =</span> T)</code></pre></div>
-<p>You can now separate different sensors (dependend on your recorded data):</p>
+data &lt;-<span class="st"> </span><span class="kw"><a href="reference/execute_file.html">execute_file</a></span>(<span class="dt">file =</span> file, <span class="dt">timestamp =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+</div>
+<div id="analyse-sensor-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#analyse-sensor-data" class="anchor"></a>Analyse sensor data</h3>
+<p>HypeRIMU provides a function to extract some specific sensor data, see next code. When a sumbitted <code>sensorName</code> is not available in the <code>data</code>, an error message is printed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MPL_Accelerometer &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_specificSensor.html">get_specificSensor</a></span>(data, <span class="dt">sensorName =</span> <span class="st">"MPL_Accelerometer"</span>)
+
 MPL_Linear_Acceleration &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_specificSensor.html">get_specificSensor</a></span>(data, <span class="dt">sensorName =</span> <span class="st">"MPL_Linear_Acceleration"</span>)</code></pre></div>
-<p>Plot your resuts:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matplot</span>(MPL_Accelerometer<span class="op">$</span>timestamp, MPL_Accelerometer[,<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</code></pre></div>
-<p>Note that with this plot (<code>matplot</code>) the x-axis is not in a human-readable format.</p>
-<p>We recommend using ggplot2:</p>
+</div>
+<div id="plot-sensor-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#plot-sensor-data" class="anchor"></a>Plot sensor data</h3>
+<p>Visulasing the data is one of the main advantages of this <strong>R</strong>-package. With some extra libraries a nice plot can be created in just a few lines. NOTE: It is recommended to use data with a timestamp.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(scales)
@@ -116,36 +154,47 @@ MPL_Linear_Acceleration_melt &lt;-<span class="st"> </span><span class="kw"><a h
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_date">scale_x_datetime</a></span>(<span class="dt">labels =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/date_format">date_format</a></span>(<span class="st">"%H:%M:%S"</span>, <span class="dt">tz =</span> <span class="kw">Sys.timezone</span>()))</code></pre></div>
+<p><img src="README_figs/README-plot_sensor_data-1.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+MPL_Accelerometer_melt &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(MPL_Accelerometer, <span class="dt">id.vars =</span> <span class="st">"timestamp"</span>)
+
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(MPL_Accelerometer_melt, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_date">scale_x_datetime</a></span>(<span class="dt">labels =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/date_format">date_format</a></span>(<span class="st">"%H:%M:%S"</span>, <span class="dt">tz =</span> <span class="kw">Sys.timezone</span>())) </code></pre></div>
+<p><img src="README_figs/README-unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
-<div id="related-projects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#related-projects" class="anchor"></a>Related projects</h2>
+</div>
+<div id="related-projects" class="section level1">
+<h1 class="hasAnchor">
+<a href="#related-projects" class="anchor"></a>Related projects</h1>
 <ul>
 <li><a href="https://github.com/ianovir/HIMUServer/">HIMUServer</a></li>
 <li><a href="https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu">HyperIMU Android</a></li>
 <li><a href="https://developer.android.com/guide/topics/sensors/index.html">Android API</a></li>
 </ul>
 </div>
-<div id="to-do" class="section level2">
-<h2 class="hasAnchor">
-<a href="#to-do" class="anchor"></a>To Do</h2>
+<div id="to-do" class="section level1">
+<h1 class="hasAnchor">
+<a href="#to-do" class="anchor"></a>To Do</h1>
 <ul>
 <li>support UDP stream</li>
 <li>make examples</li>
 <li>write function to get IP adress of server</li>
 </ul>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<div id="license" class="section level1">
+<h1 class="hasAnchor">
+<a href="#license" class="anchor"></a>License</h1>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
-    <h2>Links</h2>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/JohannesFriedrich/HypeRIMU">https://​github.com/​JohannesFriedrich/​HypeRIMU</a>
 </li>
@@ -166,6 +215,7 @@ MPL_Linear_Acceleration_melt &lt;-<span class="st"> </span><span class="kw"><a h
 <li><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
 </ul>
 </div>
+
 </div>
 
 
