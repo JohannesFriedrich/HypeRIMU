@@ -3,11 +3,8 @@ pageWithSidebar(
   sidebarPanel(
     fileInput(inputId = "file",
               label = "Choose File"),
-    # actionButton(inputId = 'start_TCP',
-    #              label = 'Start TCP'),
-    # numericInput(inputId = "port_number",
-    #              label = "Port number",
-    #              value = 5555),
+    actionButton(inputId = 'start_TCP',
+                 label = 'Start TCP'),
     br(),
     uiOutput(outputId = "SensorNames_ui")
   ),
