@@ -9,7 +9,7 @@ pageWithSidebar(
     uiOutput(outputId = "SensorNames_ui")
   ),
   mainPanel(
-    plotlyOutput('plot')
+    plotOutput('plot')
   )
 )
 

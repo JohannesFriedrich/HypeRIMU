@@ -84,7 +84,7 @@
       <h1>Getting started with HypeRIMU</h1>
                         <h4 class="author">Johannes Friedrich</h4>
             
-            <h4 class="date">2017-12-05</h4>
+            <h4 class="date">2017-12-10</h4>
           </div>
 
     
@@ -122,8 +122,11 @@
 <p>The following code shows an example of using a local file. The file can be imported via the function <code><a href="../reference/execute_file.html">execute_file()</a></code>. If your data provide a <code>timestamp</code>, choose <code>TRUE</code> for the argument <code>timestamp</code>. The functions tries to guess if a timestamp is available even when you set the <code>timestamp</code> argument wrong.</p>
 <p>When a timestamp is available in the file, the function changes the UNIX format to as POSIXct format.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(HypeRIMU)
-file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">'extdata'</span>, <span class="st">'short_y_impulse.csv'</span>, <span class="dt">package =</span> <span class="st">'HypeRIMU'</span>)
-data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/execute_file.html">execute_file</a></span>(<span class="dt">file =</span> file, <span class="dt">timestamp =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">library</span>(magrittr)
+data &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">'extdata'</span>, <span class="st">'short_y_impulse.csv'</span>, <span class="dt">package =</span> <span class="st">'HypeRIMU'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/execute_file.html">execute_file</a></span>()</code></pre></div>
+<pre><code>## 
+## [execute_file()]: Timestamp detected. Used first coloumn as timestamp.</code></pre>
 </div>
 </div>
 <div id="analyse-sensor-data" class="section level2">
@@ -142,20 +145,20 @@ MPL_Linear_Acceleration &lt;-<span class="st"> </span><span class="kw"><a href="
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(scales)
 
-MPL_Linear_Acceleration_melt &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(MPL_Linear_Acceleration, <span class="dt">id.vars =</span> <span class="st">"timestamp"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(MPL_Linear_Acceleration, <span class="dt">id.vars =</span> <span class="st">"timestamp"</span>, <span class="dt">variable.name =</span> <span class="st">"Sensor"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(MPL_Linear_Acceleration_melt, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> Sensor)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_date">scale_x_datetime</a></span>(<span class="dt">labels =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/date_format">date_format</a></span>(<span class="st">"%H:%M:%S"</span>, <span class="dt">tz =</span> <span class="kw">Sys.timezone</span>()))</code></pre></div>
-<p><img src="Getting_started_with_HypeRIMU_files/figure-html/plot%20sensor%20data-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MPL_Accelerometer_melt &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(MPL_Accelerometer, <span class="dt">id.vars =</span> <span class="st">"timestamp"</span>)
+<p><img src="Getting_started_with_HypeRIMU_files/figure-html/plot_sensor_data-1.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(MPL_Accelerometer, <span class="dt">id.vars =</span> <span class="st">"timestamp"</span>, <span class="dt">variable.name =</span> <span class="st">"Sensor"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(MPL_Accelerometer_melt, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> timestamp, <span class="dt">y =</span> value, <span class="dt">color =</span> Sensor)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_date">scale_x_datetime</a></span>(<span class="dt">labels =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/date_format">date_format</a></span>(<span class="st">"%H:%M:%S"</span>, <span class="dt">tz =</span> <span class="kw">Sys.timezone</span>())) </code></pre></div>
-<p><img src="Getting_started_with_HypeRIMU_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Getting_started_with_HypeRIMU_files/figure-html/plot_sensor_data_2-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>

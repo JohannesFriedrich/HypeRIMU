@@ -10,6 +10,8 @@
 #' @docType package
 #'
 #' @keywords package
+#' @import dplyr
+#' @importFrom magrittr "%>%"
 #' @importFrom utils read.csv
 #' @importFrom methods is
 NULL

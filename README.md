@@ -52,8 +52,12 @@ When a timestamp is available in the file, the function changes the UNIX format 
 
 ``` r
 library(HypeRIMU)
-file <- system.file('extdata', 'short_y_impulse.csv', package = 'HypeRIMU')
-data <- execute_file(file = file, timestamp = TRUE)
+library(magrittr)
+
+data <- system.file('extdata', 'short_y_impulse.csv', package = 'HypeRIMU') %>% 
+  execute_file()
+## 
+## [execute_file()]: Timestamp detected. Used first coloumn as timestamp.
 ```
 
 ### Analyse sensor data
@@ -75,27 +79,24 @@ library(ggplot2)
 library(reshape2)
 library(scales)
 
-MPL_Linear_Acceleration_melt <- melt(MPL_Linear_Acceleration, id.vars = "timestamp")
+melt(MPL_Linear_Acceleration, id.vars = "timestamp", variable.name = "Sensor") %>% 
 
-ggplot(MPL_Linear_Acceleration_melt, aes(x = timestamp, y = value, color = variable)) + 
+ggplot(aes(x = timestamp, y = value, color = Sensor)) + 
   geom_line() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
   scale_x_datetime(labels = date_format("%H:%M:%S", tz = Sys.timezone()))
 ```
 
-<img src="README_figs/README-plot_sensor_data-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_figs/README-plot_sensor_data_1-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
+MPL_Accelerometer_melt <- melt(MPL_Accelerometer, id.vars = "timestamp", variable.name = "Sensor") %>% 
 
-MPL_Accelerometer_melt <- melt(MPL_Accelerometer, id.vars = "timestamp")
-
-ggplot(MPL_Accelerometer_melt, aes(x = timestamp, y = value, color = variable)) + 
+ggplot(aes(x = timestamp, y = value, color = Sensor)) + 
   geom_line() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-  scale_x_datetime(labels = date_format("%H:%M:%S", tz = Sys.timezone())) 
+  scale_x_datetime(labels = date_format("%H:%M:%S", tz = Sys.timezone()))  
 ```
-
-<img src="README_figs/README-unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
 
 Related projects
 ================

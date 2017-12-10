@@ -1,5 +1,5 @@
 ## shiny for HypeRIMU
 
-library(tidyverse)
+# library(tidyverse)
 library(HypeRIMU)
-library(plotly)
+# library(plotly)

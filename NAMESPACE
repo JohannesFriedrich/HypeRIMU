@@ -3,5 +3,7 @@
 export(execute_TCP)
 export(execute_file)
 export(get_specificSensor)
+import(dplyr)
+importFrom(magrittr,"%>%")
 importFrom(methods,is)
 importFrom(utils,read.csv)

@@ -30,10 +30,8 @@ execute_file <- function(file, timestamp = FALSE) {
     stop("[execute_file()] Argument 'timestamp' has to be of type logical",  call. = FALSE)
 
   ## Read data
-  sensor_data_all <- readr::read_csv(file = file,
-                                     col_types = cols(
-                                       timestamp = col_double()),
-                                     skip = 3)
+  sensor_data_all <- read.csv(file = file,
+                              skip = 3)
 
   ##check if timestamp = FALSE, but data suggest to have one:
   if(!timestamp && (ncol(sensor_data_all) %% 3 == 1)){
@@ -52,11 +50,12 @@ execute_file <- function(file, timestamp = FALSE) {
   if(!timestamp){
 
     ## Extract sampling time from file (is in the second line)
-    samplingTime <- readr::read_lines(file = file, n_max = 2)[2] %>%
-      str_split(" ") %>%
+    samplingTime <- readLines(con = file, n = 2)[2] %>%
+      strsplit(" ") %>%
       unlist() %>%
-      last() %>%
-      str_replace_all("[^0-9]", "") %>%
+      dplyr::last()
+
+    samplingTime <- gsub("[^0-9]", "", samplingTime) %>%
       as.numeric()
 
     sensor_data_all$timestamp <- seq(0, (nrow(sensor_data_all) - 1)*samplingTime, samplingTime)
