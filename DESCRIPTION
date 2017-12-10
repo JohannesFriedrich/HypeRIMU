@@ -7,7 +7,7 @@ Authors@R: person("Johannes", "Friedrich", role = c("aut", "cre"), email = "joha
 Maintainer: Johannes Friedrich <johannes.friedrich@posteo.de>
 Description: A collection of functions to illustrate the usage of smartphone sensors with the app HyperIMU.
 Imports:
-  methods
+  tidyverse
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -15,9 +15,7 @@ RoxygenNote: 6.0.1
 Suggests:
   knitr,
   rmarkdown,
-  ggplot2,
   scales,
-  reshape2,
   testthat
 URL: https://github.com/JohannesFriedrich/HypeRIMU
 BugReports: https://github.com/JohannesFriedrich/HypeRIMU/issues

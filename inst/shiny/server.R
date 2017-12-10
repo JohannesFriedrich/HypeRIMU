@@ -27,7 +27,9 @@ shinyServer(function(input, output, session){
         return(NULL)
       } else {
         observeEvent(input_TCP, {
-          return(execute_TCP(as.numeric(input$port_number), timestamp = FALSE))
+          TCP_results <- execute_TCP(as.numeric(input$port_number), timestamp = FALSE)
+
+          return(TCP_results)
 
         })
       }
@@ -45,12 +47,13 @@ shinyServer(function(input, output, session){
   }) ## end data <- reactive()
 
   output$SensorNames_ui <- renderUI({
-    if (is.null(data())) {
-      return() }
+    if (is.null(data()) || is.na(data())) {
+      return()
+      }
 
     if(ncol(data()) %% 3 == 1){
-      timestampIndex <- which(strsplit(names(data()), " ") == "timestamp")
-      sensorNames <- unique(unlist(lapply(strsplit(names(data())[-timestampIndex], split = ".", fixed = TRUE), "[[", 1)))
+      timestampIndex <- which(str_split(names(data()), " ") == "timestamp")
+      sensorNames <- unique(unlist(lapply(strsplit(names(data())[-timestampIndex], split =  ".", fixed = TRUE), "[[", 1)))
     } else {
       sensorNames <- unique(unlist(lapply(strsplit(names(data()), split = ".", fixed = TRUE), "[[", 1)))
     }
@@ -61,16 +64,16 @@ shinyServer(function(input, output, session){
     )
   }) ## end renderUI()
 
-  output$plot <- renderPlot({
+  output$plot <- renderPlotly({
 
-    if(is.null(data())){
+    if(is.null(data()) || is.na(data()) || is.null(input$sensorName)){
       return(NULL)
     }
 
     timestamp$timestamp <- ifelse(ncol(data()) %% 3 == 1, TRUE, FALSE)
 
-    plot_data <- get_specificSensor(data(), sensorName = input$sensorName)
-    plot_data_melt <- melt(plot_data, id.vars = "timestamp", variable.name = "Sensors")
+    plot_data <- HypeRIMU::get_specificSensor(data(), sensorName = input$sensorName)
+    plot_data_melt <- tidyr::gather(plot_data, Sensors, value, -timestamp)
 
     if(timestamp$timestamp){
 
@@ -90,7 +93,7 @@ shinyServer(function(input, output, session){
       geom_line() +
       scale_x_datetime
 
-    return(g)
+    return(plotly::ggplotly(g))
 
   })## end renderPlot()
 

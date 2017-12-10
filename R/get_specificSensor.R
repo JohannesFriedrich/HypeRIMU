@@ -37,7 +37,7 @@ get_specificSensor <- function(data, sensorName){
   if(missing(sensorName))
     stop("[get_specificSensor()] Argument 'sensorName' is missing", call. = FALSE)
 
-  if(class(data) != "data.frame")
+  if(class(data)[3] != "data.frame")
     stop("[get_specificSensor()] Argument data has to be a data.frame", call. = FALSE)
 
 

@@ -75,10 +75,10 @@ execute_TCP <- function(port,
 
   ## transform data
   sensor_data_all <- t(apply(X = data, MARGIN = 1, FUN = function(x){
-    as.numeric(unlist(strsplit(x, ",")))
+    as.numeric(unlist(str_split(x, ",")))
   }))
 
-  sensor_data_all <- as.data.frame(sensor_data_all)
+  sensor_data_all <- as.tibble(sensor_data_all)
 
   if(!timestamp && (ncol(sensor_data_all) %% 3 == 1)){
     cat("\n[execute_TCP()]: ")
