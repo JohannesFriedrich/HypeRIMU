@@ -9,7 +9,8 @@ Description: A collection of functions to illustrate the usage of smartphone sen
 Imports:
   magrittr,
   dplyr,
-  methods
+  methods,
+  jsonlite
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
