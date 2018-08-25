@@ -10,7 +10,7 @@ test_that("Check class and length of output", {
   MPL_Linear_Acceleration <- get_specificSensor(data, "MPL_Linear_Acceleration")
 
   expect_equal(ncol(MPL_Linear_Acceleration), 4)
-  expect_equal(colnames(MPL_Linear_Acceleration), c("timestamp",
+  expect_equal(colnames(MPL_Linear_Acceleration), c("Timestamp",
                                                     "MPL_Linear_Acceleration.x",
                                                     "MPL_Linear_Acceleration.y",
                                                     "MPL_Linear_Acceleration.z"))
@@ -26,9 +26,6 @@ test_that("Check errors", {
 
   expect_error(get_specificSensor())
   expect_error(get_specificSensor(data = data))
-  expect_error(get_specificSensor(data = "test", sensorName = "MPL_Linear_Acceleration"))
-  expect_error(get_specificSensor(sensorName = "MPL_Linear_Acceleration"))
-  expect_error(get_specificSensor(data, sensorName = "Linear_Acceleration"))
 
 
 })

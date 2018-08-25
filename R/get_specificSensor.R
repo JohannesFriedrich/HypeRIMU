@@ -2,10 +2,6 @@
 #'
 #' @param data [data.frame] (**required**): [data.frame] from [execute_file] or [execute_TCP].
 #' @param sensorName [character] (**required**): Which sensor should be extracted?
-#'     Allowed sensor names: MPL_Gyroscope, MPL_Accelerometer, MPL_Magnetic_Field, MPL_Orientation,
-#' MPL_Rotation_Vector, MPL_Game_Rotation, MPL_Linear_Acceleration, MPL_Gravity, MPL_Significant_Motion,
-#' MPL_Step_Detector, MPL_Step_Coutner, MPL_Geomagnetic_Rotation, CM36686_Proximity_Sensor, CM36686_Light_Sensor,
-#' Screen_Orientation_Sensor
 #'
 #' Note: Case sensitive
 #'
@@ -41,35 +37,26 @@ get_specificSensor <- function(data, sensorName){
     stop("[get_specificSensor()] Argument data has to be a data.frame", call. = FALSE)
 
 
-  available_sensorNames <- c("MPL_Gyroscope",
-                             "MPL_Accelerometer",
-                             "MPL_Magnetic_Field",
-                             "MPL_Orientation",
-                             "MPL_Rotation_Vector",
-                             "MPL_Game_Rotation",
-                             "MPL_Linear_Acceleration",
-                             "MPL_Gravity",
-                             "MPL_Significant_Motion",
-                             "MPL_Step_Detector",
-                             "MPL_Step_Coutner",
-                             "MPL_Geomagnetic_Rotation",
-                             "CM36686_Proximity_Sensor",
-                             "CM36686_Light_Sensor",
-                             "Screen_Orientation_Sensor")
-
-  if(!sensorName %in% available_sensorNames){
-    stop(paste0("[get_specificSensor()] Sensor not supported. Supported sensors are: ", paste(available_sensorNames, collapse = ", ")),
-         call. = FALSE)
-
-  }
-
   ## read available colnames
 
   available_colNames <- colnames(data)
 
-  if("timestamp" %in% available_colNames){
-    temp <- available_colNames[-1]
-    available_colNames_unique <- unique(c("timestamp", substr(temp, 1, nchar(temp)-2)))
+  ## check if "timestamp" is in sensor names (E.g. file)
+  ## and change to "Timestamp" to unify
+
+  if("timestamp" %in% available_colNames) {
+    timestamp_index <- which("timestamp" %in% available_colNames)
+
+    available_colNames[timestamp_index] <- "Timestamp"
+
+    colnames(data) <- available_colNames
+
+  }
+
+   if("Timestamp" %in% available_colNames){
+    timestamp_index <- which("timestamp" %in% available_colNames)
+    temp <- available_colNames[-timestamp_index]
+    available_colNames_unique <- unique(c("Timestamp", substr(temp, 1, nchar(temp)-2)))
   } else {
     available_colNames_unique <- unique(substr(available_colNames, 1, nchar(available_colNames)-2))
   }
@@ -77,8 +64,8 @@ get_specificSensor <- function(data, sensorName){
   ## get index for sensor
   sensorIndex <- grepl(pattern = sensorName, x = available_colNames)
 
-  if("timestamp" %in% available_colNames){
-    timestepIndex <- grepl(pattern = "timestamp", x = available_colNames) ##Should be 1, but you never know
+  if("Timestamp" %in% available_colNames){
+    timestepIndex <- grepl(pattern = "Timestamp", x = available_colNames) ##Should be 1, but you never know
     return(data[, (sensorIndex | timestepIndex)])
   } else {
     return(data[,sensorIndex])

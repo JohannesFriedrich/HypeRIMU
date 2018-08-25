@@ -2,7 +2,7 @@ Package: HypeRIMU
 Type: Package
 Title: Analysing Sensor Data from Smartphones
 Version: 0.0.1
-Date: 2017-11-25
+Date: 2018-08-26
 Authors@R: person("Johannes", "Friedrich", role = c("aut", "cre"), email = "johannes.friedrich@posteo.de")
 Maintainer: Johannes Friedrich <johannes.friedrich@posteo.de>
 Description: A collection of functions to illustrate the usage of smartphone sensors with the app HyperIMU.
@@ -14,7 +14,7 @@ Imports:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests:
   knitr,
   reshape2,
