@@ -64,6 +64,20 @@ HyperIMU.
 data <- execute_TCP(port = 5555)
 ```
 
+#### JSON
+
+Also JSON is supported viaTCP protocol is. The usage is very smilar to
+TCP but the submitted data packages look different, see
+[HyperIMU](ttps://ianovir.com/works/mobile/hyperimu/) homepage.
+Nevertheless, the returned object is a data.frame. Using the argument
+`return_JSON = true` will return the JSON object for further analysis.
+
+``` r
+data <- execute_JSON(port = 5555)
+
+data <- execute_JSON(port = 5555, return_JSON = TRUE)
+```
+
 #### File
 
 The recommended way to read the data is to save the records on your

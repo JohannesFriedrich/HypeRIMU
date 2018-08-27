@@ -4,14 +4,14 @@
 \alias{execute_JSON}
 \title{Performs data acquisition from data received from JSON}
 \usage{
-execute_JSON(port, timestamp = FALSE, timeout = 10)
+execute_JSON(port, timeout = 10, return_JSON = FALSE)
 }
 \arguments{
 \item{port}{\link{numeric} (\strong{required}): Number of the port}
 
-\item{timestamp}{\link{logical} (\strong{with default}): Is a timestamp available in the data?}
-
 \item{timeout}{\link{integer} (\strong{optional}): the timeout (in seconds) to be used for this connection.}
+
+\item{return_JSON}{\link{logical} (\strong{optional}): return JSON object? Default: FALSE (data.frame returned)}
 }
 \description{
 Performs data acquisition from data received from JSON
@@ -22,7 +22,7 @@ Performs data acquisition from data received from JSON
 ## Example 1: read data from JSON connecntion
 ##==========================================
 
-data <- execute_JSON(port = 5555, timestamp = T)
+data <- execute_JSON(port = 5555)
 ## start HyperIMU app
 
 }
